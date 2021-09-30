@@ -60,8 +60,8 @@ exports.handler = async (event, context) => {
 
         return `\u2705 <b>${item.name}</b>: ${duration} \u23F0`;
       }).join('\n');
-      await sendTeleGram(messages, botToken, chatId)
-      await wait(2);
+      sendTeleGram(messages, botToken, chatId)
+      await wait(2)
     }
     
     return {
@@ -144,7 +144,7 @@ const requestQuests = async (walletAddress, apiKey) => {
   });
 }
 
-const sendTeleGram = async (messages, botToken, chatId) => {
+const sendTeleGram = (messages, botToken, chatId) => {
   const title = `\u231B<b>Zapper Quests</b>\u231B`;
   const telePath = [
     '/bot',
@@ -162,15 +162,11 @@ const sendTeleGram = async (messages, botToken, chatId) => {
     method: 'GET'
   }
 
-  return new Promise((resolve, reject) => {
-    let req = https.request(options, (res) => {
-    });
-
-    req.on('error', (err) => {
-      console.error('rest::request', err);
-      reject(err);
-    });
-
-    req.end();
+  const req = https.request(options, res => {
+    statusCode = res.statusCode;
   });
+  req.on('error', error => {
+    statusCode = 500;
+  })
+  req.end()
 }
