@@ -1,0 +1,19 @@
+{
+  "name": "event-notify-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:lambda": "netlify-lambda serve src/functions",
+    "build:lambda": "netlify-lambda build src/functions"
+  },
+  "author": "maket2011",
+  "license": "ISC",
+  "dependencies": {
+    "encoding": "^0.1.13",
+    "moment-timezone": "^0.5.33",
+    "netlify-lambda": "^2.0.14",
+    "node-sheets": "^1.2.0"
+  }
+}
